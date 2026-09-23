@@ -67,7 +67,7 @@ E_all = E_all[order]
 
 plt.figure(figsize=(7,5))
 
-plt.scatter(T_all,E_all)
+plt.scatter(T_all,E_all, marker = '.', c='red')
 
 plt.xlabel("Temperature")
 plt.ylabel("Energy")
