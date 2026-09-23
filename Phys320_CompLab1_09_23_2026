@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+T = np.array([
+    0.1047,
+    0.2026,
+    0.3013,
+    0.3988,
+    0.5213,
+    0.6109,
+    0.6968,
+    0.8148,
+    0.9149,
+    1.069,
+    1.2027,
+    1.3052,
+    1.4285,
+    1.5116
+])
+
+E = np.array([
+    -1335.48,
+    -1271.2,
+    -1143.66,
+    -788.43,
+    -61.48,
+    56.37,
+    156.9,
+    229.65,
+    298.24,
+    393.28,
+    470.15,
+    526.7,
+    594.95,
+    637.73
+])
+
+plt.scatter(T,E)
+plt.xlabel("Temperature")
+plt.ylabel("Energy")
+plt.title("Energy vs Temperature")
+plt.savefig(
+    "TvsE.png",
+    dpi=300,
+    bbox_inches="tight"
+)
