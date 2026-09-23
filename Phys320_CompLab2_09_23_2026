@@ -59,12 +59,20 @@ E_extra = np.array([
 T_all = np.concatenate((T,T_extra))
 E_all = np.concatenate((E,E_extra))
 
+order = np.argsort(T_all)
+T_all = T_all[order]
+E_all = E_all[order]
+# sorts the data properly, argsort gives indicies in order of what they should be in order to sort the array
+# then we use those indicies to actually sort each array, keeping the pairs of values for T and E
+
+plt.figure(figsize=(7,5))
+
 plt.scatter(T_all,E_all)
+
 plt.xlabel("Temperature")
 plt.ylabel("Energy")
-plt.title("Energy vs Temperature")
-plt.savefig(
-    "TvsE.png",
-    dpi=300,
-    bbox_inches="tight"
-)
+plt.title("Energy vs. Temperature")
+
+plt.tight_layout()
+plt.savefig("Energy_vs_Temperature.png", dpi=300)
+plt.show()
