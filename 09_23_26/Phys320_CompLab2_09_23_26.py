@@ -92,12 +92,14 @@ print(f"slope: {gas_fit.slope}")
 print(f"slope uncert: {gas_fit.stderr}")
 print(f"Heat capacity per particle: {gas_fit.slope / N}")
 print(f"Uncertainty per particle: {gas_fit.stderr / N}")
+print("Gas intercept:", gas_fit.intercept)
 #Liquid Data
 print(f"\nLiquid Data")
 print(f"slope: {liquid_fit.slope}")
 print(f"slope uncert: {liquid_fit.stderr}")
 print(f"Heat capacity per particle: {liquid_fit.slope / N}")
 print(f"Uncertainty per particle: {liquid_fit.stderr / N}")
+print("Liquid intercept:", liquid_fit.intercept)
 
 #Second plot
 T_liquid_line = np.linspace(T_all[liquid_mask].min(),T_all[liquid_mask].max(),100)
@@ -131,3 +133,11 @@ plt.title("Heat Capacity vs Temperature")
 plt.grid(alpha=0.8)
 plt.tight_layout()
 plt.savefig("09_23_26/graphs/Heat_Cap_with_Temp.png", dpi=300)
+
+
+T_transition = 0.50
+E_gas_transition = gas_fit.intercept + gas_fit.slope*T_transition
+E_liquid_transition = liquid_fit.intercept + liquid_fit.slope*T_transition
+latent_heat_total = E_gas_transition - E_liquid_transition
+latent_heat_per_particle = latent_heat_total / N
+print(f"\nLatent heat per particle:", latent_heat_per_particle)
