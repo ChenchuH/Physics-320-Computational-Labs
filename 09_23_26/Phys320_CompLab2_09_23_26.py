@@ -78,7 +78,7 @@ plt.xlim(x_min,x_max)
 plt.ylim(y_min,y_max)
 plt.grid(alpha=0.8)
 plt.tight_layout()
-plt.savefig("09_23_26/Temperature_with_Energy.png", dpi=300)
+plt.savefig("09_23_26/graphs/Temperature_with_Energy.png", dpi=300)
 
 #second plot setup
 liquid_mask = T_all <= 0.3795
@@ -118,7 +118,7 @@ plt.title("Energy vs. Temperature with Linear Fits")
 plt.legend()
 plt.grid(alpha=0.8)
 plt.tight_layout()
-plt.savefig("09_23_26/Energy_with_linear_fits.png", dpi=300)
+plt.savefig("09_23_26/graphs/Energy_with_linear_fits.png", dpi=300)
 
 #third plot - Cv vs Temp
 T_mid = (T_all[1:] + T_all[:-1]) / 2
@@ -130,4 +130,4 @@ plt.ylabel(r"$C_v$")
 plt.title("Heat Capacity vs Temperature")
 plt.grid(alpha=0.8)
 plt.tight_layout()
-plt.savefig("09_23_26/Heat_Cap_with_Temp.png", dpi=300)
+plt.savefig("09_23_26/graphs/Heat_Cap_with_Temp.png", dpi=300)
