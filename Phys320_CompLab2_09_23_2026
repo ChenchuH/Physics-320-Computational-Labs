@@ -71,6 +71,8 @@ E_all = E_all[order]
 liquid_mask = T_all <=0.3039
 gas_mask = T_all >= 0.7006
 
+
+#lin regress gives us slow and r valuie
 liquid_fit = linregress(T_all[liquid_mask],E_all[liquid_mask])
 gas_fit = linregress(T_all[gas_mask],E_all[gas_mask])
 
@@ -80,7 +82,6 @@ print("Slope =", liquid_fit.slope)
 print("Slope uncertainty =", liquid_fit.stderr)
 print("Heat capacity per particle =", liquid_fit.slope / N)
 print("Uncertainty per particle =", liquid_fit.stderr / N)
-print("R-squared =", liquid_fit.rvalue**2)
 
 # Print gas results
 print("\nGAS PHASE")
@@ -88,7 +89,6 @@ print("Slope =", gas_fit.slope)
 print("Slope uncertainty =", gas_fit.stderr)
 print("Heat capacity per particle =", gas_fit.slope / N)
 print("Uncertainty per particle =", gas_fit.stderr / N)
-print("R-squared =", gas_fit.rvalue**2)
 
 
 plt.figure(figsize=(7,5))
@@ -102,51 +102,22 @@ plt.savefig("Energy_vs_Temperature.png", dpi=300)
 
 
 # Temperature values used to draw the fitted lines
-T_liquid_line = np.linspace(
-    T_all[liquid_mask].min(),
-    T_all[liquid_mask].max(),
-    100
-)
+T_liquid_line = np.linspace(T_all[liquid_mask].min(),T_all[liquid_mask].max(),100)
+T_gas_line = np.linspace(T_all[gas_mask].min(),T_all[gas_mask].max(),100)
 
-T_gas_line = np.linspace(
-    T_all[gas_mask].min(),
-    T_all[gas_mask].max(),
-    100
-)
 # Corresponding fitted energies
-E_liquid_line = (
-    liquid_fit.intercept
-    + liquid_fit.slope * T_liquid_line
-)
+E_liquid_line = (liquid_fit.intercept + liquid_fit.slope * T_liquid_line)
 
-E_gas_line = (
-    gas_fit.intercept
-    + gas_fit.slope * T_gas_line
-)
+E_gas_line = (gas_fit.intercept+ gas_fit.slope * T_gas_line)
 
 # Plot data and fitted lines
 plt.figure(figsize=(7, 5))
 
-plt.scatter(
-    T_all,
-    E_all,
-    label="Simulation data",
-    s=15
-)
+plt.scatter(T_all,E_all,label="Simulation data",s=15)
 
-plt.plot(
-    T_liquid_line,
-    E_liquid_line,
-    color="red",
-    label="Liquid linear fit"
-)
+plt.plot(T_liquid_line,E_liquid_line,color="red",label="Liquid linear fit")
 
-plt.plot(
-    T_gas_line,
-    E_gas_line,
-    color="green",
-    label="Gas linear fit"
-)
+plt.plot(T_gas_line,E_gas_line,color="green",label="Gas linear fit")
 
 plt.xlabel("Temperature")
 plt.ylabel("Energy")
